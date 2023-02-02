@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -34,7 +35,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.sous.server.BuildConfig;
 import com.sous.server.CONTROL.ServiceControllerServer;
 import com.sous.server.MODEL.SubClassErrors;
 import com.sous.server.R;
@@ -65,7 +65,7 @@ public class FragmentServerUser extends Fragment {
     private BluetoothManager bluetoothManager;
     private MutableLiveData<String> mutableLiveDataGATTServer;
     private  String КлючДляServerFibaseOneSingnal;
-
+    private Long version;
     @SuppressLint({"RestrictedApi", "MissingPermission"})
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -84,6 +84,8 @@ public class FragmentServerUser extends Fragment {
             animationServer = AnimationUtils.loadAnimation(getContext(),R.anim.slide_in_row_vibrator2);
             ArrayListДанныеФрагмент1.add("Фрагмент Сервера");
             КлючДляServerFibaseOneSingnal ="220d6edf-2b29-453e-97a8-d2aefe4a9eb0";
+            PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
+            version = pInfo.getLongVersionCode();
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -93,7 +95,7 @@ public class FragmentServerUser extends Fragment {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -117,7 +119,7 @@ public class FragmentServerUser extends Fragment {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -145,7 +147,7 @@ public class FragmentServerUser extends Fragment {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -171,7 +173,7 @@ public class FragmentServerUser extends Fragment {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -191,7 +193,7 @@ public class FragmentServerUser extends Fragment {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -217,7 +219,7 @@ public class FragmentServerUser extends Fragment {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -242,7 +244,7 @@ public class FragmentServerUser extends Fragment {
                             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                            final Object ТекущаяВерсияПрограммы = version;
                             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -265,7 +267,7 @@ public class FragmentServerUser extends Fragment {
                             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                            final Object ТекущаяВерсияПрограммы = version;
                             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -287,7 +289,7 @@ public class FragmentServerUser extends Fragment {
                             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                            final Object ТекущаяВерсияПрограммы = version;
                             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -309,7 +311,7 @@ public class FragmentServerUser extends Fragment {
                             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                            final Object ТекущаяВерсияПрограммы = version;
                             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -331,7 +333,7 @@ public class FragmentServerUser extends Fragment {
                             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                            final Object ТекущаяВерсияПрограммы = version;
                             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -353,7 +355,7 @@ public class FragmentServerUser extends Fragment {
                             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                            final Object ТекущаяВерсияПрограммы = version;
                             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -370,7 +372,7 @@ public class FragmentServerUser extends Fragment {
                 valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                 valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                 valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                final Object ТекущаяВерсияПрограммы = version;
                 Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                 valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                 new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -394,7 +396,7 @@ public class FragmentServerUser extends Fragment {
                 valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                 valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                 valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                final Object ТекущаяВерсияПрограммы = version;
                 Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                 valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                 new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -419,7 +421,7 @@ public class FragmentServerUser extends Fragment {
                 valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                 valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                 valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                final Object ТекущаяВерсияПрограммы = version;
                 Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                 valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                 new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -447,7 +449,7 @@ public class FragmentServerUser extends Fragment {
                 valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                 valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                 valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                final Object ТекущаяВерсияПрограммы = version;
                 Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                 valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                 new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -472,7 +474,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -493,7 +495,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -526,7 +528,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -587,7 +589,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -612,7 +614,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -637,7 +639,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -658,7 +660,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -680,7 +682,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -711,7 +713,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -782,7 +784,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -809,7 +811,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -836,7 +838,7 @@ public class FragmentServerUser extends Fragment {
                 valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                 valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                 valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                final Object ТекущаяВерсияПрограммы = version;
                 Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                 valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                 new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -873,7 +875,7 @@ public class FragmentServerUser extends Fragment {
                     valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                     valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                     valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                    final Object ТекущаяВерсияПрограммы = version;
                     Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                     valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                     new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);

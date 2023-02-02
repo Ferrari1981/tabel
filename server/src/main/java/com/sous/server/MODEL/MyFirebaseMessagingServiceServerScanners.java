@@ -2,17 +2,16 @@ package com.sous.server.MODEL;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.sous.server.BuildConfig;
-
-
 import java.util.Map;
 
 public class MyFirebaseMessagingServiceServerScanners extends FirebaseMessagingService {
 
+    private Long version=0l;
     // TODO: 02.12.2021
     public MyFirebaseMessagingServiceServerScanners() {
         super();
@@ -27,7 +26,7 @@ public class MyFirebaseMessagingServiceServerScanners extends FirebaseMessagingS
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -52,7 +51,10 @@ public class MyFirebaseMessagingServiceServerScanners extends FirebaseMessagingS
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
       super.onMessageReceived(remoteMessage);
         try{
-        Log.d(this.getClass().getName(), " onMessageReceived ПРИШЛО СООБЩЕНИЕ УВЕДОМЛЕНИЯ  SERVER BLE SCANNER  С САЙТА ONESIGNAL !!!!!!!!!!!!  " +
+            PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0);
+            version = pInfo.getLongVersionCode();
+
+            Log.d(this.getClass().getName(), " onMessageReceived ПРИШЛО СООБЩЕНИЕ УВЕДОМЛЕНИЯ  SERVER BLE SCANNER  С САЙТА ONESIGNAL !!!!!!!!!!!!  " +
                 " MyFirebaseMessagingService   metod onNewToken "+remoteMessage.getMessageId()+"\n"+
               "  remoteMessage.getMessageType() "+  remoteMessage.getMessageType()+"\n"+
                 "  remoteMessage.getRawData() "+remoteMessage.getRawData()+"\n"+
@@ -86,7 +88,7 @@ public class MyFirebaseMessagingServiceServerScanners extends FirebaseMessagingS
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -131,7 +133,7 @@ public class MyFirebaseMessagingServiceServerScanners extends FirebaseMessagingS
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);

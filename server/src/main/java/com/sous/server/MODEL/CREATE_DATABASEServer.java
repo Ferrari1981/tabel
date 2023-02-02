@@ -3,16 +3,11 @@ package com.sous.server.MODEL;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-
-import com.sous.server.BuildConfig;
-
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Date;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
@@ -24,7 +19,7 @@ public class CREATE_DATABASEServer extends SQLiteOpenHelper{ ///SQLiteOpenHelper
    private   Context context;
     private      SQLiteDatabase ССылкаНаСозданнуюБазу;
     private     CopyOnWriteArrayList<String> ИменаТаблицыОтАндройда;
-
+    private Long version=0l;
     public SQLiteDatabase getССылкаНаСозданнуюБазу() {
         Log.d(this.getClass().getName()," get () БАЗА  ДАННЫХ   ДСУ-1 ОТКРЫТА ССылкаНаСозданнуюБазу.isOpen()  " +ССылкаНаСозданнуюБазу);
         return ССылкаНаСозданнуюБазу;
@@ -46,6 +41,8 @@ public class CREATE_DATABASEServer extends SQLiteOpenHelper{ ///SQLiteOpenHelper
                             +ССылкаНаСозданнуюБазу.isOpen());
                 }
             }
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            version = pInfo.getLongVersionCode();
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -55,7 +52,7 @@ public class CREATE_DATABASEServer extends SQLiteOpenHelper{ ///SQLiteOpenHelper
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -83,7 +80,7 @@ public class CREATE_DATABASEServer extends SQLiteOpenHelper{ ///SQLiteOpenHelper
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -108,7 +105,7 @@ public class CREATE_DATABASEServer extends SQLiteOpenHelper{ ///SQLiteOpenHelper
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -191,7 +188,7 @@ public class CREATE_DATABASEServer extends SQLiteOpenHelper{ ///SQLiteOpenHelper
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);

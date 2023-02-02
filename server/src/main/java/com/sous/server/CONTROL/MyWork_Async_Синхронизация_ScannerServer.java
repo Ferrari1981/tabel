@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageInfo;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.VibrationEffect;
@@ -17,7 +18,7 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.sous.server.BuildConfig;
+
 import com.sous.server.MODEL.SubClassErrors;
 
 import java.util.Date;
@@ -35,6 +36,7 @@ public class MyWork_Async_Синхронизация_ScannerServer extends Worke
     private List<WorkInfo> WorkManagerScanner;
     private   ExecutorService executorServiceServerScanner =Executors.newSingleThreadExecutor();
     private ServiceControllerServer.LocalBinderСканнер binderСканнерServer;
+    private Long version=0l;
     // TODO: 28.09.2022
     public MyWork_Async_Синхронизация_ScannerServer(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -42,9 +44,10 @@ public class MyWork_Async_Синхронизация_ScannerServer extends Worke
        this.context = context;
         Log.i(this.context.getClass().getName(), " public MyWork_Async_Синхронизация_Общая(@NonNull Context context," +
                 " @NonNull WorkerParameters workerParams) {  Контекст "+"\n"+ this.context);
+            PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0);
+            version = pInfo.getLongVersionCode();
             // TODO: 22.12.2022
             МетодБиндингаОбщая();
-
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -54,7 +57,7 @@ public class MyWork_Async_Синхронизация_ScannerServer extends Worke
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -103,7 +106,7 @@ public class MyWork_Async_Синхронизация_ScannerServer extends Worke
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -125,7 +128,7 @@ public class MyWork_Async_Синхронизация_ScannerServer extends Worke
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -147,7 +150,7 @@ public class MyWork_Async_Синхронизация_ScannerServer extends Worke
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);

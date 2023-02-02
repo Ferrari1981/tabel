@@ -37,7 +37,7 @@ import com.sous.scanner.R;
 
 
 public class FragmentBootScanner extends Fragment {
-    Long version;
+    Long version=0l;
     @SuppressLint("RestrictedApi")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

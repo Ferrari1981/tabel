@@ -2,6 +2,7 @@ package com.sous.server.MODEL;
 
 import android.content.ContentValues;
 import android.content.UriMatcher;
+import android.content.pm.PackageInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -13,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
 
-import com.sous.server.BuildConfig;
 
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -28,6 +28,7 @@ public class ContentProviderServer extends android.content.ContentProvider {
     private Handler handler;
     private Integer ТекущаяСтрокаПриДОбавлениииURL=0;
     private  CopyOnWriteArrayList<String> ИменаТаблицыОтАндройда;
+    private Long version=0l;
     public ContentProviderServer() throws InterruptedException {
         try{
             ИменаТаблицыОтАндройда=new CopyOnWriteArrayList<>();
@@ -45,7 +46,8 @@ public class ContentProviderServer extends android.content.ContentProvider {
                     ТекущаяСтрокаПриДОбавлениииURL++;
                 }
             });
-
+            PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
+            version = pInfo.getLongVersionCode();
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -55,7 +57,7 @@ public class ContentProviderServer extends android.content.ContentProvider {
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы =version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -78,7 +80,7 @@ public class ContentProviderServer extends android.content.ContentProvider {
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы =version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -123,7 +125,7 @@ public class ContentProviderServer extends android.content.ContentProvider {
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы =version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -168,7 +170,7 @@ public class ContentProviderServer extends android.content.ContentProvider {
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы =version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -216,7 +218,7 @@ public class ContentProviderServer extends android.content.ContentProvider {
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы =version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);

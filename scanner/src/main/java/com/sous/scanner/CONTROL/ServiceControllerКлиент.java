@@ -78,7 +78,7 @@ public class ServiceControllerКлиент extends IntentService {
         super("ServiceControllerКлиент");
     }
     private   MutableLiveData<String> mediatorLiveDataGATT;
-    private     Long version;
+    private     Long version=0l;
     @Override
     public void onCreate() {
         super.onCreate();

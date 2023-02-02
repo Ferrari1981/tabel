@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.util.Log;
 
 import androidx.work.BackoffPolicy;
@@ -14,7 +15,7 @@ import androidx.work.NetworkType;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
-import com.sous.server.BuildConfig;
+
 import com.sous.server.MODEL.SubClassErrors;
 
 import java.util.Date;
@@ -22,6 +23,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class BroadcastReceiverWorkManagerScannersServer extends BroadcastReceiver {
+    private Long version=0l;
     public BroadcastReceiverWorkManagerScannersServer() {
         super();
         Log.i(this.getClass().getName(), " ЗАПУСК  BroadcastReceiverWorkManagerScannersServer " + new Date().toLocaleString());
@@ -29,6 +31,8 @@ public class BroadcastReceiverWorkManagerScannersServer extends BroadcastReceive
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            version = pInfo.getLongVersionCode();
             // TODO: 01.02.2023 запуск workmanager синхронизации
             МетодИнициализацийСинхронизацияДанныхWorkManager(context);
             // TODO: 01.02.2023   повтореый запуск службы Server Scanner
@@ -42,7 +46,7 @@ public class BroadcastReceiverWorkManagerScannersServer extends BroadcastReceive
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -90,7 +94,7 @@ public class BroadcastReceiverWorkManagerScannersServer extends BroadcastReceive
         valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
         valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
         valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-        final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+        final Object ТекущаяВерсияПрограммы = version;
         Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
         valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
         new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -138,7 +142,7 @@ public class BroadcastReceiverWorkManagerScannersServer extends BroadcastReceive
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(context).МетодЗаписиОшибок(valuesЗаписываемОшибки);

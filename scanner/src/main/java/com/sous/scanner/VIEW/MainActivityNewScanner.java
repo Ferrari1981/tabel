@@ -59,7 +59,7 @@ public class MainActivityNewScanner extends AppCompatActivity  {
     private FragmentTransaction fragmentTransaction;
     private Fragment fragment;
     private LinearLayout linearLayou;
-    private     Long version;
+    private     Long version=0l;
     private MaterialTextView materialTextViewToolBar;
     private  MutableLiveData<Binder> event;
     @SuppressLint("RestrictedApi")

@@ -22,7 +22,7 @@ public class CREATE_DATABASEScanner extends SQLiteOpenHelper{ ///SQLiteOpenHelpe
     private   Context context;
     private      SQLiteDatabase ССылкаНаСозданнуюБазу;
     private     CopyOnWriteArrayList<String> ИменаТаблицыОтАндройда;
-    private     Long version;
+    private     Long version=0l;
 
 
     public SQLiteDatabase getССылкаНаСозданнуюБазу() {

@@ -21,6 +21,7 @@ import android.bluetooth.le.BluetoothLeAdvertiser;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
@@ -42,7 +43,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.onesignal.OneSignal;
 
-import com.sous.server.BuildConfig;
+
 import com.sous.server.MODEL.CREATE_DATABASEServer;
 import com.sous.server.MODEL.MyFirebaseMessagingServiceServerScanners;
 import com.sous.server.MODEL.SubClassErrors;
@@ -89,7 +90,7 @@ public class ServiceControllerServer extends IntentService {
     private Set<BluetoothDevice> pairedDevices = new HashSet<>();
     private UUID uuidSERVER;
     private BluetoothGattServer server;
-
+    private Long version=0l;
     public ServiceControllerServer() {
         super("ServiceControllerServer");
     }
@@ -106,6 +107,8 @@ public class ServiceControllerServer extends IntentService {
             this.sqLiteDatabase = createDatabaseScanner.getССылкаНаСозданнуюБазу();
             TAG = getClass().getName().toString();
             executorServiceСканер = Executors.newCachedThreadPool();
+            PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0);
+            version = pInfo.getLongVersionCode();
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -115,7 +118,7 @@ public class ServiceControllerServer extends IntentService {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -177,7 +180,7 @@ public class ServiceControllerServer extends IntentService {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -214,7 +217,7 @@ public class ServiceControllerServer extends IntentService {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -260,7 +263,7 @@ public class ServiceControllerServer extends IntentService {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -320,7 +323,7 @@ public class ServiceControllerServer extends IntentService {
                         valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                         valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                         valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                        final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                        final Object ТекущаяВерсияПрограммы = version;
                         Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                         valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                         new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -347,7 +350,7 @@ public class ServiceControllerServer extends IntentService {
                                     Log.i(TAG, "Connected to GATT server  newValueПришлиДАнныеОтКлиента."+new String(value));
                                     if (value.length>0) {
                                         handler.post(()->{
-                                            mutableLiveDataGATTServer.setValue("Девайс отмечен..."+"\n"+device.getName().toString()+ "\n"+device.getAddress().toString());
+                                            mutableLiveDataGATTServer.setValue("Девайс отмечен..."+"\n"+device.getName().toString()+ "\n"+device.getAddress().toString()+ "\n"+new Date().toLocaleString());
                                             Log.i(TAG, "\"Обмен...device.getAddress().toString()+device.getName().toString())" + " "
                                                     +"Обмен...."+device.getAddress().toString()+""+device.getName().toString());
                                         });
@@ -375,7 +378,7 @@ public class ServiceControllerServer extends IntentService {
                         valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                         valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                         valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                        final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                        final Object ТекущаяВерсияПрограммы = version;
                         Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                         valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                         new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -397,7 +400,7 @@ public class ServiceControllerServer extends IntentService {
                         valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
                         valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
                         valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-                        final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+                        final Object ТекущаяВерсияПрограммы = version;
                         Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                         valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
                         new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -433,7 +436,7 @@ public class ServiceControllerServer extends IntentService {
             valuesЗаписываемОшибки.put("Klass", this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod", Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError", Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error", ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -502,7 +505,7 @@ public class ServiceControllerServer extends IntentService {
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
@@ -554,7 +557,7 @@ public class ServiceControllerServer extends IntentService {
             valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
             valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
             valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
-            final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
+            final Object ТекущаяВерсияПрограммы = version;
             Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
             valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
             new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);

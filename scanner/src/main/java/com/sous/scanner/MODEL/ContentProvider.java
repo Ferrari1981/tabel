@@ -23,7 +23,7 @@ public class ContentProvider extends android.content.ContentProvider {
     private AsyncTaskLoader<?> asyncTaskLoader;
     private Handler handler;
     private Integer ТекущаяСтрокаПриДОбавлениииURL=0;
-    private     Long  version;
+    private     Long  version=0l;
     private  CopyOnWriteArrayList<String> ИменаТаблицыОтАндройда;
     public ContentProvider() throws InterruptedException {
         try{

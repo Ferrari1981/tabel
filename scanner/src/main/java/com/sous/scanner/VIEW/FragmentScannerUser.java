@@ -64,7 +64,7 @@ public class FragmentScannerUser extends Fragment {
     private BluetoothManager bluetoothManager;
     private   MutableLiveData<String> mediatorLiveDataGATT;
     private  String КлючДляFibaseOneSingnal;
-    private     Long version;
+    private     Long version=0l;
 
     @SuppressLint({"RestrictedApi", "MissingPermission"})
     @Override
