@@ -12,14 +12,12 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.Map;
 
 public class MyFirebaseMessagingServiceScanner extends FirebaseMessagingService {
-    private     Long version;
+    private     Long version=0l;
     // TODO: 02.12.2021
     public MyFirebaseMessagingServiceScanner() {
         super();
         try{
         Log.w(this.getClass().getName(), " MyFirebaseMessagingServiceScanner " );
-            PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0);
-            version = pInfo.getLongVersionCode();
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -79,6 +77,8 @@ public class MyFirebaseMessagingServiceScanner extends FirebaseMessagingService 
                     break;
            }
         }
+            PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0);
+            version = pInfo.getLongVersionCode();
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
