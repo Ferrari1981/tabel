@@ -75,7 +75,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 //import static com.dsy.dsu.Business_logic_Only_Class.PUBLIC_CONTENT.ИменаТаблицыОтАндройда;
 
 public class MainActivity_Face_Start extends AppCompatActivity {
-
     private    ProgressBar ПрогрессБарНаFace;
     private  String    ПубличноеИмяПользовательДлСервлета=         new String();
     private  String      ПубличноеПарольДлСервлета=         new String();
@@ -90,7 +89,7 @@ public class MainActivity_Face_Start extends AppCompatActivity {
     private SQLiteDatabase sqLiteDatabaseСамаБазы;
     // TODO: 24.02.202
     private   Handler HandlerДляПоказаПользователюЗагрузки ;
-    private SharedPreferences preferences;
+    private SharedPreferences preferences; //todo Хранилице данных
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
