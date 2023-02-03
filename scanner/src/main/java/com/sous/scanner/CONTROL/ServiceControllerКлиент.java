@@ -321,11 +321,13 @@ public class ServiceControllerКлиент extends IntentService {
                                     handler.post(()->{
                                         mediatorLiveDataGATT.setValue("SERVER#SERVER#SouConnect");
                                             });
-                                    gatt.connect();
-                                    gatt.discoverServices();
+                                    Boolean ДанныеОТGATTССевромGATT=         gatt.discoverServices();
+                                    Log.d(TAG, "Trying to ДанныеОТGATTССевромGATT " + ДанныеОТGATTССевромGATT);
                                     break;
                                 case BluetoothProfile.STATE_CONNECTING :
                                     Log.i(TAG, "Connected to GATT client  BluetoothProfile.STATE_CONNECTING");
+                                    gatt.disconnect();
+                                    gatt.close();
                                     handler.post(()->{
                                         mediatorLiveDataGATT.setValue("SERVER#SERVER#SousAvtoNULL");
                                     });
@@ -412,8 +414,6 @@ public class ServiceControllerКлиент extends IntentService {
                                         mediatorLiveDataGATT.setValue(ОтветОтСервераОбратно);
                                     });
                                 }
-                                gatt.disconnect();
-                                gatt.close();
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -440,6 +440,8 @@ public class ServiceControllerКлиент extends IntentService {
                     BluetoothGatt gatt =      bluetoothDevice.connectGatt(context, false, bluetoothGattCallback, BluetoothDevice.TRANSPORT_AUTO);
                     Log.d(this.getClass().getName(), "\n" + " bluetoothDevice" + bluetoothDevice);
                     gatt.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH);
+               Boolean КоннектССевромGATT=     gatt.connect();
+                    Log.d(TAG, "Trying КоннектССевромGATT " + КоннектССевромGATT);
                     int bondstate = bluetoothDevice.getBondState();
                   ///  bluetoothDevice.fetchUuidsWithSdp();
                     Log.d(TAG, "Trying to write characteristic..., first bondstate " + bondstate);
