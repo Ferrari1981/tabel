@@ -327,6 +327,11 @@ public class ServiceControllerКлиент extends IntentService {
                                     break;
                                 case BluetoothProfile.STATE_DISCONNECTED :
                                     Log.i(TAG, "Connected to GATT client. BluetoothProfile.STATE_DISCONNECTED ###2  onConnectionStateChange  "+new Date().toLocaleString());
+                                    if (status==133) {
+                                        handler.post(()->{
+                                            mediatorLiveDataGATT.setValue("SERVER#ENDSCANNERGATA");
+                                        });
+                                    }
                                     gatt.close();
                                     break;
 
@@ -387,6 +392,7 @@ public class ServiceControllerКлиент extends IntentService {
                                         handler.post(()->{
                                         mediatorLiveDataGATT.setValue("SERVER#SousAvtoDONTDIVICE");
                                         });
+                                        gatt.disconnect();
                                     }
                                 }
                             } catch (Exception e) {

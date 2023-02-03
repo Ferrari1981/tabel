@@ -725,7 +725,7 @@ public class FragmentScannerUser extends Fragment {
                                             case "SERVER#SERVER#SousAvtoERROR" :
                                             case "SERVER#SERVER#SousAvtoNULL" :
                                                 handler.postDelayed(()->{
-                                                    holder. materialButtonКотроль.setText("Ошибка");
+                                                    holder. materialButtonКотроль.setText("Нет связи");
                                                     handler.postDelayed(()-> {
                                                         holder. materialButtonКотроль.setText("На работу");
                                                     },3000);
@@ -734,13 +734,18 @@ public class FragmentScannerUser extends Fragment {
 
                                             case "SERVER#SousAvtoDONTDIVICE" :
                                                 handler.postDelayed(()->{
-                                                    holder. materialButtonКотроль.setText("Нет связи");
+                                                    holder. materialButtonКотроль.setText("Нет  сопряжение");
                                                     Vibrator v2 = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                                                     v2.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
                                                     handler.postDelayed(()-> {
                                                         holder. materialButtonКотроль.setText("На работу");
                                                     },3000);
 
+                                                },1000);
+                                                break;
+                                            case "SERVER#ENDSCANNERGATA" :
+                                                    handler.postDelayed(()-> {
+                                                        holder. materialButtonКотроль.setText("На работу");
                                                 },1000);
                                                 break;
 
