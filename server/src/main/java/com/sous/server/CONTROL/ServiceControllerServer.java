@@ -301,12 +301,14 @@ public class ServiceControllerServer extends IntentService {
                         switch (newState) {
                             case BluetoothProfile.STATE_CONNECTED:
                                 Log.i(TAG, "Connected to GATT server. BluetoothProfile.STATE_CONNECTED");
+                                Vibrator v2 = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                                v2.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
                                 handler.post(()->{
                                     mutableLiveDataGATTServer.setValue("SERVERGATTRUNNIG");
                                 });
                                 server.connect(device,true);
                                 break;
-                            case BluetoothProfile.STATE_CONNECTING:
+                            case BluetoothProfile.STATE_DISCONNECTED:
                                 Log.i(TAG, "Connected to GATT server. BluetoothProfile.STATE_CONNECTING ");
                                 break;
                         }
@@ -333,7 +335,7 @@ public class ServiceControllerServer extends IntentService {
                 public void onServiceAdded(int status, BluetoothGattService service) {
                     super.onServiceAdded(status, service);
                     Vibrator v2 = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                    v2.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+                    v2.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
                 }
 
                 @Override
@@ -369,6 +371,7 @@ public class ServiceControllerServer extends IntentService {
 
                         }
                         server.sendResponse(device, requestId, BluetoothGatt.GATT_SUCCESS, offset, new Date().toLocaleString().toString().getBytes(StandardCharsets.UTF_8));
+                        server.cancelConnection(device);
                     } catch (Exception e) {
                         e.printStackTrace();
                         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"

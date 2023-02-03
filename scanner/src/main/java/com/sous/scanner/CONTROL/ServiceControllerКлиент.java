@@ -35,6 +35,7 @@ import com.sous.scanner.MODEL.CREATE_DATABASEScanner;
 import com.sous.scanner.MODEL.MyFirebaseMessagingServiceScanner;
 import com.sous.scanner.MODEL.SubClassErrors;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -292,7 +293,6 @@ public class ServiceControllerКлиент extends IntentService {
             // TODO: 08.12.2022 сканирование Bluetooth
             bluetoothAdapter = bluetoothManager.getAdapter();
             bluetoothAdapter.enable();
-
             String[] АдресаBluetoothСерверов = {"BC:61:93:E6:F2:EB"};///TODO  служебный xiaomi "BC:61:93:E6:F2:EB", МОЙ XIAOMI FC:19:99:79:D6:D4  //////      "BC:61:93:E6:E2:63","FF:19:99:79:D6:D4"
             uuidКлиент=        ParcelUuid.fromString("00000000-0000-1000-8000-00805f9b34fb").getUuid();
 
@@ -315,6 +315,7 @@ public class ServiceControllerКлиент extends IntentService {
                         @Override
                         public void onConnectionStateChange(BluetoothGatt gatt, int status,
                                                             int newState) {
+                            try{
                             switch (newState){
                                 case BluetoothProfile.STATE_CONNECTED :
                                     Log.i(TAG, "Connected to GATT client. BluetoothProfile.STATE_CONNECTED  ");
@@ -324,16 +325,26 @@ public class ServiceControllerКлиент extends IntentService {
                                     Boolean ДанныеОТGATTССевромGATT=         gatt.discoverServices();
                                     Log.d(TAG, "Trying to ДанныеОТGATTССевромGATT " + ДанныеОТGATTССевромGATT);
                                     break;
-                                case BluetoothProfile.STATE_CONNECTING :
+                                case BluetoothProfile.STATE_DISCONNECTED :
                                     Log.i(TAG, "Connected to GATT client  BluetoothProfile.STATE_CONNECTING");
-                                    gatt.disconnect();
                                     gatt.close();
-                                    handler.post(()->{
-                                        mediatorLiveDataGATT.setValue("SERVER#SERVER#SousAvtoNULL");
-                                    });
                                     break;
 
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
+                                    + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                            ContentValues valuesЗаписываемОшибки=new ContentValues();
+                            valuesЗаписываемОшибки.put("Error",e.toString().toLowerCase());
+                            valuesЗаписываемОшибки.put("Klass",this.getClass().getName());
+                            valuesЗаписываемОшибки.put("Metod",Thread.currentThread().getStackTrace()[2].getMethodName());
+                            valuesЗаписываемОшибки.put("LineError",   Thread.currentThread().getStackTrace()[2].getLineNumber());
+                            final Object ТекущаяВерсияПрограммы = version;
+                            Integer   ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
+                            valuesЗаписываемОшибки.put("whose_error",ЛокальнаяВерсияПОСравнение);
+                            new SubClassErrors(getApplicationContext()).МетодЗаписиОшибок(valuesЗаписываемОшибки);
+                        }
                         }
                         // TODO: 26.01.2023
                         @Override
@@ -414,6 +425,7 @@ public class ServiceControllerКлиент extends IntentService {
                                         mediatorLiveDataGATT.setValue(ОтветОтСервераОбратно);
                                     });
                                 }
+                                gatt.disconnect();
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -445,16 +457,24 @@ public class ServiceControllerКлиент extends IntentService {
                     int bondstate = bluetoothDevice.getBondState();
                   ///  bluetoothDevice.fetchUuidsWithSdp();
                     Log.d(TAG, "Trying to write characteristic..., first bondstate " + bondstate);
-                    switch (bondstate) {
+                  switch (bondstate) {
                         case BluetoothDevice.DEVICE_TYPE_UNKNOWN:
                             Log.i(TAG, "BluetoothDevice.DEVICE_TYPE_UNKNOWN" + bondstate);//Указывает, что удаленное устройство не связано (сопряжено).
-                           // bluetoothDevice.createBond();
+                            bluetoothDevice.createBond();
+                            bluetoothDevice.fetchUuidsWithSdp();
+                            handler.post(()->{
+                                mediatorLiveDataGATT.setValue("SERVER#SousAvtoDONTDIVICE");
+                            });
                             break;
                         case BluetoothDevice.BOND_BONDING:
                             Log.i(TAG, "BluetoothDevice.BOND_BONDING" + bondstate);//Указывает, что удаленное устройство не связано (сопряжено).
                             break;
                         case BluetoothDevice.BOND_NONE://Указывает, что удаленное устройство не связано (сопряжено).
-                           // bluetoothDevice.createBond();
+                            bluetoothDevice.createBond();
+                            bluetoothDevice.fetchUuidsWithSdp();
+                            handler.post(()->{
+                                mediatorLiveDataGATT.setValue("SERVER#SousAvtoDONTDIVICE");
+                            });
                             Log.i(TAG, "BluetoothDevice.BOND_NONE" + bondstate);//Указывает, что удаленное устройство не связано (сопряжено).
                             break;
                         case BluetoothDevice.BOND_BONDED://Указывает, что удаленное устройство связано (сопряжено).
