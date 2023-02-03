@@ -448,13 +448,13 @@ public class ServiceControllerКлиент extends IntentService {
                     switch (bondstate) {
                         case BluetoothDevice.DEVICE_TYPE_UNKNOWN:
                             Log.i(TAG, "BluetoothDevice.DEVICE_TYPE_UNKNOWN" + bondstate);//Указывает, что удаленное устройство не связано (сопряжено).
-                            bluetoothDevice.createBond();
+                           // bluetoothDevice.createBond();
                             break;
                         case BluetoothDevice.BOND_BONDING:
                             Log.i(TAG, "BluetoothDevice.BOND_BONDING" + bondstate);//Указывает, что удаленное устройство не связано (сопряжено).
                             break;
                         case BluetoothDevice.BOND_NONE://Указывает, что удаленное устройство не связано (сопряжено).
-                            bluetoothDevice.createBond();
+                           // bluetoothDevice.createBond();
                             Log.i(TAG, "BluetoothDevice.BOND_NONE" + bondstate);//Указывает, что удаленное устройство не связано (сопряжено).
                             break;
                         case BluetoothDevice.BOND_BONDED://Указывает, что удаленное устройство связано (сопряжено).
