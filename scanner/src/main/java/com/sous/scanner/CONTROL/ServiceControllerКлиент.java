@@ -318,7 +318,7 @@ public class ServiceControllerКлиент extends IntentService {
                             try{
                             switch (newState){
                                 case BluetoothProfile.STATE_CONNECTED :
-                                    Log.i(TAG, "Connected to GATT client. BluetoothProfile.STATE_CONNECTED  ");
+                                    Log.i(TAG, "Connected to GATT client. BluetoothProfile.STATE_CONNECTED ###1 onConnectionStateChange  "+new Date().toLocaleString());
                                     handler.post(()->{
                                         mediatorLiveDataGATT.setValue("SERVER#SERVER#SouConnect");
                                             });
@@ -326,7 +326,7 @@ public class ServiceControllerКлиент extends IntentService {
                                     Log.d(TAG, "Trying to ДанныеОТGATTССевромGATT " + ДанныеОТGATTССевромGATT);
                                     break;
                                 case BluetoothProfile.STATE_DISCONNECTED :
-                                    Log.i(TAG, "Connected to GATT client  BluetoothProfile.STATE_CONNECTING");
+                                    Log.i(TAG, "Connected to GATT client. BluetoothProfile.STATE_DISCONNECTED ###2  onConnectionStateChange  "+new Date().toLocaleString());
                                     gatt.close();
                                     break;
 
