@@ -81,7 +81,6 @@ public class ServiceControllerServer extends IntentService {
     private CREATE_DATABASEServer createDatabaseScanner;
     public LocalBinderСканнер binder = new LocalBinderСканнер();
     private Context context;
-    private Activity activity;
     private String TAG;
     private Handler handler;
     private ExecutorService executorServiceСканер;
@@ -242,9 +241,8 @@ public class ServiceControllerServer extends IntentService {
     }
 
     // TODO: 30.11.2022 сервер СКАНИРОВАНИЯ
-    public void МетодГлавныйСеврера(@NonNull Handler handler, @NonNull Activity activity, @NonNull BluetoothManager bluetoothManager, @NonNull MutableLiveData<String>mutableLiveDataGATTServer) {
-        this.context = activity;
-        this.activity = activity;
+    public void МетодГлавныйСеврера(@NonNull Handler handler, @NonNull Context context, @NonNull BluetoothManager bluetoothManager, @NonNull MutableLiveData<String>mutableLiveDataGATTServer) {
+        this.context = context;
         this.handler = handler;
         this.bluetoothManagerServer = bluetoothManager;
         this.mutableLiveDataGATTServer=mutableLiveDataGATTServer;

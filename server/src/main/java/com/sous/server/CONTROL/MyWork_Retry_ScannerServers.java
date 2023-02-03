@@ -91,6 +91,9 @@ public class MyWork_Retry_ScannerServers extends Worker {
             }
         });
         executorServiceServerScanner.awaitTermination(1, TimeUnit.MINUTES);
+
+
+
             // TODO: 31.01.2023 конец work manger
         } catch (Exception e) {
             e.printStackTrace();
